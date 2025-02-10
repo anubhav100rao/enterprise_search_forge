@@ -1,6 +1,6 @@
 # Enterprise search engine using LLMs
 
-## **Details**
+## **Improvement Items**
 
 -   **Document Ingestion:**  
     Expand the ingestion process to handle various document formats (PDFs, DOCXs, etc.) and add better text segmentation.
