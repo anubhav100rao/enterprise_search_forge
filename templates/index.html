@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enterprise Search Chatbot</title>
+</head>
+<body>
+    <h1>Enterprise Search Chatbot</h1>
+    <form id="query-form">
+        <input type="text" name="query" id="query" placeholder="Ask your question here" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('query-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = document.getElementById('query').value;
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = 'Loading...';
+            const response = await fetch('/ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ query })
+            });
+            const data = await response.json();
+            if(data.answer) {
+                responseDiv.innerHTML = `<strong>Answer:</strong> ${data.answer}`;
+            } else {
+                responseDiv.innerHTML = 'Error: ' + data.error;
+            }
+        });
+    </script>
+</body>
+</html>
